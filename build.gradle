@@ -1,0 +1,25 @@
+
+plugins {
+    id 'java'
+}
+
+repositories {
+   
+    jcenter()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+   testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.2'
+   testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+   // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+    testCompile group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-7'
+    
+}
