@@ -35,9 +35,9 @@ public class AuthorisationTest {
 		    WebDriver driver = new ChromeDriver();
 		    driver.get("http://localhost:8080");
 		    WebElement userName = driver.findElement(By.id("username"));
-		    userName.sendKeys("User");
+		    userName.sendKeys("Stein");
 		    WebElement password = driver.findElement(By.id("password"));
-		    password.sendKeys("885ce46d-bfd0-489c-9441-c0fa3f2561e7");
+		    password.sendKeys("12345");
 		    WebElement button = driver.findElement(By.tagName("button"));
 		    button.submit();
 		    driver.quit();
@@ -48,7 +48,7 @@ public class AuthorisationTest {
 	 @Test
 	 public void sholdDiplayHello() {
 		 given()
-		   .auth().preemptive().basic("user", "885ce46d-bfd0-489c-9441-c0fa3f2561e7")
+		   .auth().basic("Stein", "12345")
 		 .when()
 		   .get("http://localhost:8080/hello")
 	     .then()
