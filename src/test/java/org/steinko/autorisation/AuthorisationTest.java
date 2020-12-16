@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthorisationTest {
 	
@@ -30,9 +32,11 @@ public class AuthorisationTest {
 	 @Test
      public void shouldAutorise()  {
 		 
-		 System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\ChromeDriver\\chromedriver.exe");
-
-		    WebDriver driver = new ChromeDriver();
+		   System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\ChromeDriver\\chromedriver.exe");
+		   ChromeOptions chromeOptions = new ChromeOptions();
+	       chromeOptions.addArguments("--headless");
+		   WebDriver driver = new ChromeDriver(chromeOptions);
+		   
 		    driver.get("http://localhost:8080");
 		    WebElement userName = driver.findElement(By.id("username"));
 		    userName.sendKeys("Stein");
@@ -40,6 +44,10 @@ public class AuthorisationTest {
 		    password.sendKeys("12345");
 		    WebElement button = driver.findElement(By.tagName("button"));
 		    button.submit();
+		    
+		    driver.get(url);
+		    WebElement text = driver.findElement(By.tagName("body"));
+		    assertEquals("Hello!", text.getText());
 		    driver.quit();
      
      }
@@ -50,7 +58,7 @@ public class AuthorisationTest {
 		 given()
 		   .auth().basic("Stein", "12345")
 		 .when()
-		   .get("http://localhost:8080/hello")
+		   .get(url)
 	     .then()
 	        .statusCode(200);
 	 }
